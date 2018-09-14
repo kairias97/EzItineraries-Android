@@ -3,7 +3,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
+def dbflow_version = "4.2.4" // reference the releases tab on Github for latest versions
+// or you can grab a 10-digit commit hash of any commit in the project that builds.
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -26,11 +29,40 @@ android {
             multiDexEnabled true
         }
     }
+    flavorDimensions "stage"
+    productFlavors {
+
+        dev {
+            dimension "stage"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            versionCode defaultConfig.versionCode + 30000
+            versionName "1.0.0"
+            buildConfigField "String", "HOST_ITINERARIES_API", "\"https://itinerariesapp.ml/Itineraries/api/\""
+
+        }
+        beta {
+            dimension "stage"
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            versionCode defaultConfig.versionCode + 20000
+            versionName "1.0.0"
+            buildConfigField "String", "HOST_ITINERARIES_API", "\"https://itinerariesapp.ml/Itineraries/api/\""
+        }
+        prod {
+            dimension "stage"
+            versionCode defaultConfig.versionCode + 10000
+            versionName "1.0.0"
+            buildConfigField "String", "HOST_ITINERARIES_API", "\"https://itinerariesapp.ml/Itineraries/api/\""
+        }
+
+    }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
@@ -46,4 +78,22 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    //For DbFlow library
+    kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    // kotlin extensions for DbFlow
+    implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${dbflow_version}"
+
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.16'
+    kapt 'com.google.dagger:dagger-compiler:2.16'
+    implementation 'com.google.dagger:dagger-android:2.16'
+    implementation 'com.google.dagger:dagger-android-support:2.16'
+    kapt 'com.google.dagger:dagger-android-processor:2.16'
+
+
+}
+repositories {
+    mavenCentral()
 }
