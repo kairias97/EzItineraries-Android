@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/see_trip_plan_details"
+        android:icon="@drawable/baseline_remove_red_eye_black_48"
+        android:title="@string/title_see_trip_plan_details" />
+
+    <item
+        android:id="@+id/generate_itinerarie_proposal"
+        android:icon="@drawable/ic_map_plus_black_24dp"
+        android:title="@string/title_generate_itinerarie_proposal" />
+
+    <item
+        android:id="@+id/delete_trip_plan"
+        android:icon="@drawable/baseline_delete_black_48"
+        android:title="@string/title_delete_trip_plan" />
+</menu>

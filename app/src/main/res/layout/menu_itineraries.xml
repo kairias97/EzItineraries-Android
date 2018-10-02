@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/image_see_itinerary_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/see_trip_plan_details"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/ic_eye_grey600_48dp"/>
+    <TextView
+        android:id="@+id/see_itinerary_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/image_see_itinerary_details"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="8dp"
+        android:textSize="18sp"
+        android:text="@string/title_see_itineraries_details"/>
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/image_delete_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/image_see_itinerary_details"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/delete_itinerary"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/ic_delete_grey600_48dp"/>
+    <TextView
+        android:id="@+id/delete_itinerary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/image_see_itinerary_details"
+        app:layout_constraintLeft_toRightOf="@id/image_delete_itinerary"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="8dp"
+        android:textSize="18sp"
+        android:text="@string/title_delete_itineraries"/>
+
+</android.support.constraint.ConstraintLayout>

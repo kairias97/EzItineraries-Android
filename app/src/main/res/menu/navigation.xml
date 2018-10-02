@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_trip_plans"
+        android:icon="@drawable/baseline_business_center_black_24"
+        android:title="@string/title_trip_plans" />
+
+    <item
+        android:id="@+id/navigation_itineraries"
+        android:icon="@drawable/baseline_map_black_24"
+        android:title="@string/title_itineraries" />
+
+    <item
+        android:id="@+id/navigation_attraction_suggestion"
+        android:icon="@drawable/baseline_place_black_24"
+        android:title="@string/title_suggest_attractions" />
+
+</menu>

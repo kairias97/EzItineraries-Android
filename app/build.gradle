@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def dbflow_version = "4.2.4" // reference the releases tab on Github for latest versions
+// or you can grab a 10-digit commit hash of any commit in the project that builds.
+android {
+  signingConfigs {
+    config {
+      keyAlias 'publicReleaseKey'
+      keyPassword 'axioma$9716$'
+      storeFile file('D:/Github/Android/EZItineraries/playstorereleasekey.jks')
+      storePassword 'axioma$9716$'
+    }
+  }
+  compileSdkVersion 26
+  defaultConfig {
+    applicationId "com.kairias97.ezitineraries"
+    minSdkVersion 17
+    targetSdkVersion 26
+    versionCode 3
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    vectorDrawables.useSupportLibrary = true
+    signingConfig signingConfigs.config
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      multiDexEnabled true
+      signingConfig signingConfigs.config
+    }
+    debug {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      multiDexEnabled true
+      signingConfig signingConfigs.config
+    }
+  }
+  flavorDimensions "stage"
+  productFlavors {
+    dev {
+      dimension "stage"
+      applicationIdSuffix ".dev"
+      versionNameSuffix "-dev"
+      versionCode defaultConfig.versionCode + 30000
+      versionName "1.0.0"
+      buildConfigField "String", "HOST_ITINERARIES_API", "\"https://itinerariesapp.ml/Itineraries/api/\""
+    }
+    beta {
+      dimension "stage"
+      applicationIdSuffix ".beta"
+      versionNameSuffix "-beta"
+      versionCode defaultConfig.versionCode + 20000
+      versionName "1.0.1"
+      buildConfigField "String", "HOST_ITINERARIES_API", "\"https://itinerariesapp.ml/Itineraries/api/\""
+      signingConfig signingConfigs.config
+    }
+    prod {
+      dimension "stage"
+      versionCode defaultConfig.versionCode + 10000
+      versionName "1.0.0"
+      buildConfigField "String", "HOST_ITINERARIES_API", "\"https://itinerariesapp.ml/Itineraries/api/\""
+    }
+  }
+}
+
+
+dependencies {
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation 'com.android.support:appcompat-v7:26.1.0'
+  implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+  implementation 'com.android.support:support-vector-drawable:26.1.0'
+  implementation 'com.android.support:support-v4:26.1.0'
+  implementation 'com.google.android.gms:play-services-places:15.0.1'
+  implementation 'com.google.android.gms:play-services-maps:15.0.1'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test:runner:1.0.2'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+  implementation 'com.android.support:cardview-v7:26.1.0'
+  implementation 'com.android.support:recyclerview-v7:26.1.0'
+  implementation 'com.android.support:design:26.1.0'
+  implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+  implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+  implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+  implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+  //For DbFlow library
+  kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+  implementation "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+  implementation "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+  // kotlin extensions for DbFlow
+  implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${dbflow_version}"
+  //Dagger
+  implementation 'com.google.dagger:dagger:2.16'
+  kapt 'com.google.dagger:dagger-compiler:2.16'
+  implementation 'com.google.dagger:dagger-android:2.16'
+  implementation 'com.google.dagger:dagger-android-support:2.16'
+  kapt 'com.google.dagger:dagger-android-processor:2.16'
+  implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
+    transitive = true;
+  }
+  implementation 'com.google.maps.android:android-maps-utils:0.5+'
+
+}
+repositories {
+  mavenCentral()
+  maven { url 'https://maven.fabric.io/public' }
+}
